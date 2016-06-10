@@ -10,6 +10,7 @@
     "react-native": "^0.26.2"
   },
   "devDependencies": {
-    "react-native-router-flux": "^3.26.6"
+    "react-native-router-flux": "^3.26.6",
+    "remote-redux-devtools": "^0.3.3"
   }
 }
