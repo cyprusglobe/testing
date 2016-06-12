@@ -1,4 +1,4 @@
-import {SET_CURRENT_E, SET_EVENTS} from "../actions/event"
+import {SET_CURRENT_E, SET_EVENTS} from "../actions/eventActions"
 
 const initialState = {
     events: [],

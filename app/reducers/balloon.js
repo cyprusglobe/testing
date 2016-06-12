@@ -1,21 +1,31 @@
-import {SET_CURRENT, SET_BALLOONS} from "../actions/balloon"
+import * as types from '../constants/balloonActionTypes'
 
 const initialState = {
   balloons: [],
+  isLoading: false,
   page: 1
 }
 
 export default function balloon(state = initialState, action) {
   switch (action.type) {
-    case SET_BALLOONS:
+    case types.SET_BALLOONS:
       return {
-        ...state,
-        balloons: action.balloons
+          ...state,
+          isLoading: true
       }
-    case SET_CURRENT:
+      case types.SET_BALLOONS_SUCCESS:
       return {
         ...state,
-        current: action.current
+        balloons: action.payload.data,
+        isLoading: false
+      }
+    case types.SET_BALLOONS_FAIL:
+      return {
+          ...state,
+          error: {
+            'status': action.error.status,
+            'message': action.error.message
+          }
       }
     default :
       return state

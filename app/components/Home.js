@@ -2,31 +2,24 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { View, Text, StyleSheet } from 'react-native'
-import * as balloonActionCreators from '../actions/balloon'
+import * as balloonActionCreators from '../actions/balloonActions'
 
  class Home extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-        balloons: {}
-    }
-  }
-
-  componentDidMount = () => {
-
-    this.props.fetchAndSetBalloons()
+    this.state = {}
   }
 
   render() {
     return (
         <View style={styles.container}>
             <Text style={styles.heading}>Balloon Fiesta 2016</Text>
-            <Text style={styles.heading}>Balloons Counts: {this.props.balloons.length}</Text>
+            <Text>{this.props.data.balloon_name}</Text>
         </View>
     )
   }
 }
- 
+
 var styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -39,8 +32,5 @@ var styles = StyleSheet.create({
     fontWeight: "100",
   }
 })
- 
- export default connect(
-     (state) => ({ balloons: state.balloon.balloons }),
-     (dispatch) => (bindActionCreators(balloonActionCreators, dispatch))
- )(Home)
+
+ export default connect()(Home)
