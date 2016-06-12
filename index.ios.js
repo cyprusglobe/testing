@@ -4,14 +4,23 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import BFApp from './app'
 
+import React, {Component} from 'react';
+import {AppRegistry} from 'react-native';
+import {Provider} from 'react-redux';
+import App from './app/components/Schedule';
+import configureStore from './app/stores/configureStore';
+import Routes from './app/config/routes'
+const store = configureStore();
+
+class BFApp extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <Routes />
+            </Provider>
+        )
+    }
+}
 
 AppRegistry.registerComponent('BFApp', () => BFApp);

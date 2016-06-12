@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux'
-import account from './account'
-import store from './store'
+import {combineReducers} from 'redux'
 import balloon from './balloon'
- 
-export default combineReducers({
-  account,
+import event from './event'
+
+const rootReducer = combineReducers({
   balloon,
-  store,
-});
+  event
+})
+
+export default rootReducer
  
