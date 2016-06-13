@@ -1,4 +1,4 @@
-import {fetchBalloons} from '../api/balloon'
+import {fetchBalloons, fetchBalloonsWithPage} from '../api/balloon'
 import * as types from '../constants/balloonActionTypes'
 
 export function fetchingBalloon(status) {
@@ -25,6 +25,12 @@ export function setCurrent(store) {
 export function fetchAndSetBalloons() {
   return function (dispatch) {
     return dispatch(fetchBalloons())
+  }
+}
+
+export function fetchAndSetBalloonsWithPage(offset) {
+  return function (dispatch) {
+    return dispatch(fetchBalloonsWithPage(offset))
   }
 }
 

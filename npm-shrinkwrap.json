@@ -194,6 +194,11 @@
           "from": "js-tokens@1.0.1",
           "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-1.0.1.tgz"
         },
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.2.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+        },
         "source-map": {
           "version": "0.5.6",
           "from": "source-map@>=0.5.0 <0.6.0",
@@ -364,7 +369,14 @@
     "babel-plugin-proto-to-assign": {
       "version": "1.0.4",
       "from": "babel-plugin-proto-to-assign@>=1.0.3 <2.0.0",
-      "resolved": "https://registry.npmjs.org/babel-plugin-proto-to-assign/-/babel-plugin-proto-to-assign-1.0.4.tgz"
+      "resolved": "https://registry.npmjs.org/babel-plugin-proto-to-assign/-/babel-plugin-proto-to-assign-1.0.4.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.9.3 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+        }
+      }
     },
     "babel-plugin-react-constant-elements": {
       "version": "1.0.3",
@@ -909,7 +921,14 @@
     "cheerio": {
       "version": "0.19.0",
       "from": "cheerio@>=0.19.0 <0.20.0",
-      "resolved": "https://registry.npmjs.org/cheerio/-/cheerio-0.19.0.tgz"
+      "resolved": "https://registry.npmjs.org/cheerio/-/cheerio-0.19.0.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.2.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+        }
+      }
     },
     "chokidar": {
       "version": "1.5.1",
@@ -1515,7 +1534,8 @@
         },
         "ws": {
           "version": "1.0.1",
-          "from": "ws@1.0.1"
+          "from": "ws@1.0.1",
+          "resolved": "https://registry.npmjs.org/ws/-/ws-1.0.1.tgz"
         }
       }
     },
@@ -2570,7 +2590,14 @@
     "grouped-queue": {
       "version": "0.3.2",
       "from": "grouped-queue@>=0.3.0 <0.4.0",
-      "resolved": "https://registry.npmjs.org/grouped-queue/-/grouped-queue-0.3.2.tgz"
+      "resolved": "https://registry.npmjs.org/grouped-queue/-/grouped-queue-0.3.2.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.10.1 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+        }
+      }
     },
     "gruntfile-editor": {
       "version": "1.2.0",
@@ -3083,9 +3110,9 @@
       "resolved": "https://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz"
     },
     "lodash": {
-      "version": "3.10.1",
-      "from": "lodash@>=3.10.1 <4.0.0",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+      "version": "4.13.1",
+      "from": "lodash@latest",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.13.1.tgz"
     },
     "lodash-es": {
       "version": "4.13.1",
@@ -3794,7 +3821,14 @@
     "react-native": {
       "version": "0.26.2",
       "from": "react-native@latest",
-      "resolved": "https://registry.npmjs.org/react-native/-/react-native-0.26.2.tgz"
+      "resolved": "https://registry.npmjs.org/react-native/-/react-native-0.26.2.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.10.1 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+        }
+      }
     },
     "react-native-button": {
       "version": "1.6.0",
@@ -4276,7 +4310,8 @@
       "dependencies": {
         "component-emitter": {
           "version": "1.1.2",
-          "from": "component-emitter@1.1.2"
+          "from": "component-emitter@1.1.2",
+          "resolved": "https://registry.npmjs.org/component-emitter/-/component-emitter-1.1.2.tgz"
         },
         "json3": {
           "version": "3.3.2",
@@ -4938,6 +4973,11 @@
       "from": "yeoman-assert@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/yeoman-assert/-/yeoman-assert-2.2.1.tgz",
       "dependencies": {
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.6.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
+        },
         "path-exists": {
           "version": "2.1.0",
           "from": "path-exists@>=2.1.0 <3.0.0",
@@ -4981,6 +5021,11 @@
           "version": "0.8.5",
           "from": "inquirer@>=0.8.0 <0.9.0",
           "resolved": "https://registry.npmjs.org/inquirer/-/inquirer-0.8.5.tgz"
+        },
+        "lodash": {
+          "version": "3.10.1",
+          "from": "lodash@>=3.5.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
         },
         "run-async": {
           "version": "0.1.0",

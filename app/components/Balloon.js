@@ -38,15 +38,15 @@ class Balloon extends Component {
                   return (
                       <View key={balloon.id}>
                         <Image
-                            source={{uri: photo_url}}
-                            style={{
-                              width: 320,
-                              height: 320,
-                            }}
-                            indicatorProps={{
-                              indeterminate: false
-                            }}
-                            indicator={ProgressBar}
+                          source={{uri: photo_url}}
+                          style={{
+                            width: 320,
+                            height: 320,
+                          }}
+                          indicatorProps={{
+                            indeterminate: false
+                          }}
+                          indicator={ProgressBar}
                         />
                         <Text>
                           {balloon.reg_num}
