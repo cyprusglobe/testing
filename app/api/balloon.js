@@ -19,7 +19,6 @@ export function fetchBalloons () {
 }
 
 export function fetchBalloonsWithPage (offset) {
-  console.log(offset)
   return {
     type: types.SET_BALLOONS_MORE,
     payload: {

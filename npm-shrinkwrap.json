@@ -4229,6 +4229,11 @@
       "from": "set-immediate-shim@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/set-immediate-shim/-/set-immediate-shim-1.0.1.tgz"
     },
+    "shallowequal": {
+      "version": "0.2.2",
+      "from": "shallowequal@latest",
+      "resolved": "https://registry.npmjs.org/shallowequal/-/shallowequal-0.2.2.tgz"
+    },
     "shebang-regex": {
       "version": "1.0.0",
       "from": "shebang-regex@>=1.0.0 <2.0.0",

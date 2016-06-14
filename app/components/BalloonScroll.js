@@ -1,7 +1,7 @@
-
+import shallowequal from 'shallowequal'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, ListView, Text, StyleSheet, InteractionManager, TouchableHighlight} from 'react-native'
+import { View, ListView, Text, StyleSheet, InteractionManager, TouchableHighlight, ActivityIndicatorIOS} from 'react-native'
 import * as balloonActionCreators from '../actions/balloonActions'
 import Image from 'react-native-image-progress'
 import ProgressBar from 'react-native-progress/Bar'
@@ -24,9 +24,17 @@ class BalloonScroll extends Component {
     }
   }
 
-  componentDidMount() {
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate =
+      !shallowequal(this.props, nextProps) ||
+      !shallowequal(this.state, nextState)
+      console.log(shouldUpdate)
+    return shouldUpdate
+  }
+
+  componentWillMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.props.fetchAndSetBalloonsWithPage(0)
+      this.props.fetchAndSetBalloonsWithPage(this.props.page)
     })
   }
 
@@ -59,14 +67,26 @@ class BalloonScroll extends Component {
   }
 
   render() {
-    footer = (
-      <TouchableHighlight
-        style={styles.footer}
-        underlayColor="#991111"
-        onPress={() => this.handleMore()}>
-        <Text style={styles.moreButtonText}>Show more</Text>
-      </TouchableHighlight>
-    )
+    const isLoading = this.props.isLoading
+      if (isLoading) {
+  			footer = (
+  				<View style={styles.footer}>
+  					<ActivityIndicatorIOS
+  						animating={isLoading}
+  						color="#ffffff"
+  						size="small"/>
+  				</View>
+  			)
+  		} else {
+        footer = (
+          <TouchableHighlight
+            style={styles.footer}
+            underlayColor="#991111"
+            onPress={() => this.handleMore()}>
+            <Text style={styles.moreButtonText}>Show more</Text>
+          </TouchableHighlight>
+        )
+      }
       return (
         <View style={styles.container}>
           <ListView

@@ -19,13 +19,14 @@ export default function balloon(state = initialState, action) {
     case types.SET_BALLOONS_SUCCESS:
       return Object.assign({}, state, {
         balloons: Object.assign({}, state.balloons, {
-          items: action.payload.data
+          items: action.payload.data.balloons
         }),
         isLoading: false
       })
       case types.SET_BALLOONS_MORE:
         console.log(action)
         return Object.assign({}, state, {
+          isLoading: true,
           page: action.payload.request.params.offset
         })
 
@@ -35,7 +36,7 @@ export default function balloon(state = initialState, action) {
         balloons: Object.assign({}, state.balloons, {
           items: [
               ...state.balloons.items,
-              ...action.payload.data
+              ...action.payload.data.balloons,
             ]
         }),
         isLoading: false,

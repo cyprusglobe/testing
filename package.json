@@ -18,7 +18,8 @@
     "reactotron": "^0.6.1",
     "redux": "^3.5.2",
     "redux-axios-middleware": "^1.2.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "shallowequal": "^0.2.2"
   },
   "devDependencies": {
     "react-native-router-flux": "^3.26.6",
