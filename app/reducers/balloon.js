@@ -3,53 +3,40 @@ import merge from 'lodash/merge'
 import union from 'lodash/union'
 
 const initialState = {
-  balloons: {
-    items: []
+  balloon: {
+    data: []
   },
   isLoading: false,
-  page: 0
+  error: {
+    status: 0,
+    message: ''
+  }
 }
 
 export default function balloon(state = initialState, action) {
   switch (action.type) {
-    case types.SET_BALLOONS:
+    case types.SET_BALLOON:
       return Object.assign({}, state, {
         isLoading: true
       })
-    case types.SET_BALLOONS_SUCCESS:
-      return Object.assign({}, state, {
-        balloons: Object.assign({}, state.balloons, {
-          items: action.payload.data.balloons
+    case types.SET_BALLOON_SUCCESS:
+      return Object.assign({}, state.balloon, {
+        balloon: Object.assign({}, state.balloon, {
+          data: []
         }),
         isLoading: false
       })
-      case types.SET_BALLOONS_MORE:
-        console.log(action)
-        return Object.assign({}, state, {
-          isLoading: true,
-          page: action.payload.request.params.offset
-        })
-
-    case types.SET_BALLOONS_MORE_SUCCESS:
-      console.log(action)
+    case types.SET_BALLOON_FAIL:
       return Object.assign({}, state, {
-        balloons: Object.assign({}, state.balloons, {
-          items: [
-              ...state.balloons.items,
-              ...action.payload.data.balloons,
-            ]
+        balloon: Object.assign({}, state.balloon, {
+          data: []
         }),
         isLoading: false,
-        page: action.meta.previousAction.payload.request.params.offset
-      })
-    case types.SET_BALLOONS_FAIL:
-      return {
-          ...state,
-          error: {
-            'status': action.error.status,
-            'message': action.error.message
-          }
-      }
+        error: {
+          'status': action.error.status,
+          'message': action.error.message
+        }
+    })
     default :
       return state
   }

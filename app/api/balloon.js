@@ -3,13 +3,16 @@ import { URI } from '../constants/api'
 import { AUTH_TOKEN_TYPE, AUTH_TOKEN } from '../constants/api'
 import * as types from '../constants/balloonActionTypes'
 
-export function fetchBalloons () {
+export function fetchBalloonsWithPage (page) {
   return {
-    type: types.SET_BALLOONS,
+    type: types.SET_BALLOONS_MORE,
     payload: {
       request: {
         url: '/balloons',
         method: 'get',
+        params: {
+          page: page
+        },
         headers: {
           'Authorization': AUTH_TOKEN_TYPE + ' ' + AUTH_TOKEN
         }
@@ -18,16 +21,13 @@ export function fetchBalloons () {
   }
 }
 
-export function fetchBalloonsWithPage (offset) {
+export function fetchBalloon (id) {
   return {
-    type: types.SET_BALLOONS_MORE,
+    type: types.SET_BALLOON,
     payload: {
       request: {
-        url: '/balloons',
+        url: '/balloon/' + id,
         method: 'get',
-        params: {
-          offset: offset
-        },
         headers: {
           'Authorization': AUTH_TOKEN_TYPE + ' ' + AUTH_TOKEN
         }

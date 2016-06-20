@@ -1,11 +1,11 @@
 import Home from './Home'
-import Balloon from './Balloon'
+import BalloonDetailView from './BalloonDetailView'
 import Schedule from './Schedule'
-import BalloonScroll from './BalloonScroll'
+import BalloonListView from './BalloonListView'
 
 export {
     Home,
-    Balloon,
+    BalloonDetailView,
     Schedule,
-    BalloonScroll
+    BalloonListView
 }

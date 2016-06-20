@@ -1,12 +1,5 @@
-import {fetchBalloons, fetchBalloonsWithPage} from '../api/balloon'
+import {fetchBalloon, fetchBalloonsWithPage} from '../api/balloon'
 import * as types from '../constants/balloonActionTypes'
-
-export function fetchingBalloon(status) {
-  return {
-    type: types.FETCHING_BALLOONS,
-    fetching: status
-  }
-}
 
 export function fetchError(error) {
   return {
@@ -15,30 +8,14 @@ export function fetchError(error) {
   }
 }
 
-export function setCurrent(store) {
-  return {
-    type: types.SET_CURRENT_BALLOON,
-    current: store
+export function fetchAndSetBalloonsWithPage(page) {
+  return function (dispatch) {
+    return dispatch(fetchBalloonsWithPage(page))
   }
 }
 
-export function fetchAndSetBalloons() {
+export function fetchAndSetBalloon(id) {
   return function (dispatch) {
-    return dispatch(fetchBalloons())
-  }
-}
-
-export function fetchAndSetBalloonsWithPage(offset) {
-  return function (dispatch) {
-    return dispatch(fetchBalloonsWithPage(offset))
-  }
-}
-
-export function setCurrentBalloon(store) {
-  return function (dispatch) {
-    return {balloon: store}
-  }, (err, data) => {
-    if (err) return dispatch(fetchError(err))
-    dispatch(setCurrent(store))
+    return dispatch(fetchBalloon(id))
   }
 }
