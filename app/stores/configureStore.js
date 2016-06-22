@@ -17,7 +17,7 @@ export default function configureStore(initialState) {
       reducer,
       initialState,
       compose(
-          applyMiddleware(thunk, axiosMiddleware(client)),
+          applyMiddleware(thunk, axiosMiddleware(client), Reactotron.reduxMiddleware),
           devTools()
       )
   );

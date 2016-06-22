@@ -43,12 +43,3 @@ export function fetchAndSetEvents() {
             .catch((err) => dispatch(fetchError(err)))
     }
 }
-
-export function setCurrentEvent(store) {
-    return function (dispatch) {
-        return {event: store}
-    }, (err, data) => {
-        if (err) return dispatch(fetchError(err))
-        dispatch(setCurrent(store))
-    }
-}

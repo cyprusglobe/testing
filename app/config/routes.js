@@ -1,9 +1,7 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
 import { Router, Scene } from 'react-native-router-flux'
 import {
     BalloonDetailView,
-    Schedule,
     BalloonListView,
     Home
 } from '../components/'

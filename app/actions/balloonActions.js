@@ -1,10 +1,16 @@
-import {fetchBalloon, fetchBalloonsWithPage} from '../api/balloon'
+import {fetchBalloon, fetchBalloons, fetchBalloonsWithPage} from '../api/balloon'
 import * as types from '../constants/balloonActionTypes'
 
 export function fetchError(error) {
   return {
     type: types.SET_BALLOONS_FAIL,
     error: error
+  }
+}
+
+export function fetchAndSetBalloons(page) {
+  return function (dispatch) {
+    return dispatch(fetchBalloons(page))
   }
 }
 

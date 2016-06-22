@@ -16,15 +16,18 @@ class BalloonListView extends Component {
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
-    console.log(this.props)
     this.state = {
-      items: [],
+      result: {
+        items: []
+      },
       isLoading: false,
-      dataSource: this.dataSource.cloneWithRows(this.props.balloons),
+      dataSource: this.dataSource.cloneWithRows(this.props.result),
       page_info: {
         current_page: 0,
         total_count: 0,
-        number_of_pages: 0
+        number_of_pages: 0,
+        previous_page: 0,
+        next_page: 0
       }
     }
   }
@@ -38,13 +41,13 @@ class BalloonListView extends Component {
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.props.fetchAndSetBalloonsWithPage(1)
+      this.props.fetchAndSetBalloons(this.props.page_info.current_page)
     })
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dataSource: this.dataSource.cloneWithRows(nextProps.balloons)
+      dataSource: this.dataSource.cloneWithRows(nextProps.result)
     })
   }
 
@@ -53,7 +56,7 @@ class BalloonListView extends Component {
   }
 
   handleMoreBalloons() {
-		this.props.fetchAndSetBalloonsWithPage(1)
+		this.props.fetchAndSetBalloonsWithPage(this.props.page_info.next_page)
 	}
 
   renderLoading() {
@@ -89,6 +92,7 @@ class BalloonListView extends Component {
 
   render() {
     const isLoading = this.props.isLoading
+
     if (isLoading) {
 			footer = (
 				<View style={styles.footer}>
@@ -102,7 +106,7 @@ class BalloonListView extends Component {
             style={styles.footer}
             underlayColor="#991111"
             onPress={() => this.handleMoreBalloons()}>
-            <Text style={styles.moreButtonText}>Show more</Text>
+            <Text style={styles.moreButtonText}>Load more</Text>
           </TouchableHighlight>
         )
       } else {
@@ -173,15 +177,16 @@ var styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
-    balloons: state.balloons.items,
-    isLoading: state.balloons.isLoading
-    // page_info: {
-    //   total_count: state.balloons.page_info.total_count,
-    //   number_of_pages: state.balloons.page_info.number_of_pages,
-    //   current_page: state.balloons.page_info.current_page
-    // }
+    result: state.balloons.result.items,
+    isLoading: state.balloons.isLoading,
+    page_info: {
+      total_count: state.balloons.page_info.total_count,
+      number_of_pages: state.balloons.page_info.number_of_pages,
+      current_page: state.balloons.page_info.current_page,
+      previous_page: state.balloons.page_info.previous_page,
+      next_page: state.balloons.page_info.next_page
+    }
   }
 }
 export default connect(mapStateToProps, balloonActionCreators)(BalloonListView)
