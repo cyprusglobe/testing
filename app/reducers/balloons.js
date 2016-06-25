@@ -1,4 +1,4 @@
-import * as types from '../constants/balloonActionTypes'
+import * as types from '../constants/balloons/actionTypes'
 import merge from 'lodash/merge'
 import union from 'lodash/union'
 
@@ -22,11 +22,13 @@ const initialState = {
 
 export default function balloons(state = initialState, action) {
   switch (action.type) {
+
     case types.SET_BALLOONS:
+
       return Object.assign({}, state, {
         isLoading: true
       })
-    case types.SET_BALLOONS_SUCCESS:
+    case 'SET_BALLOONS_SUCCESS':
       return Object.assign({}, state, {
         result: Object.assign({}, state.result, {
           items: action.payload.data.balloons
@@ -52,7 +54,6 @@ export default function balloons(state = initialState, action) {
       })
 
     case types.SET_BALLOONS_MORE_SUCCESS:
-      console.log(state)
       return Object.assign({}, state, {
         result: Object.assign({}, state.result, {
           items: [

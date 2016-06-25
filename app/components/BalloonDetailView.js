@@ -1,33 +1,43 @@
 import React, {Component} from 'react'
+import shallowequal from 'shallowequal'
 import {connect} from 'react-redux'
 import {View, Text, StyleSheet, InteractionManager} from 'react-native'
-import * as balloonActionCreators from '../actions/balloonActions'
+import * as balloonActionCreators from '../actions/balloon/actions'
 import Image from 'react-native-image-progress'
 import ProgressBar from 'react-native-progress/Bar'
 import Button from 'react-native-button'
 import {Actions} from 'react-native-router-flux'
-import {fetchBalloons} from '../api/balloon'
 
 class BalloonDetailView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      balloon: {}
+      result: {
+        item: {}
+      },
+      isLoadingb: false
     }
   }
 
-  componentWillMount() {
-    InteractionManager.runAfterInteractions(() => {
-      this.props.fetchAndSetBalloon(this.props.balloon_detail.id)
-    })
-  }
-
   render() {
-    return (
+    if (this.props.isLoadingb) {
+      return (
+          <View style={styles.container}>
+            <Text style={styles.heading}>Loading...</Text>
+          </View>
+      )
+    } else {
+      return (
         <View style={styles.container}>
-          <Text style={styles.heading}>{ this.props.balloon.balloon_name }</Text>
+          <Image
+              source={{
+                uri: this.props.result.photos_url + '/300x'
+              }}
+              style={styles.thumbnail} />
+            <Text style={styles.heading}>{this.props.result.balloon_name}</Text>
         </View>
-    )
+      )
+    }
   }
 }
 
@@ -40,19 +50,23 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#f2f2f2',
-    flex: 1,
-    paddingTop: 64
+    flex: 1
   },
   heading: {
     fontSize: 30,
     fontWeight: '100',
-  }
+  },
+  thumbnail: {
+    width: 300,
+    height: 300,
+    marginRight: 10,
+  },
 })
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
-    balloon: state.balloon
+    result: state.balloontest.item,
+    isLoadingb: state.balloontest.isLoadingb
   }
 }
 

@@ -1,12 +1,14 @@
 import {combineReducers} from 'redux'
 import balloon from './balloon'
 import balloons from './balloons'
-import event from './event'
+import balloonstest from './balloonstest'
+import balloontest from './balloontest'
 
 const rootReducer = combineReducers({
   balloon,
   balloons,
-  event
+  balloonstest,
+  balloontest
 })
 
 export default rootReducer

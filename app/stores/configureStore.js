@@ -10,7 +10,7 @@ import { AUTH_TOKEN, AUTH_TOKEN_TYPE } from '../constants/api'
 export default function configureStore(initialState) {
 
   const client = axios.create({ //all axios can be used, shown in axios documentation
-    baseURL:'http://10.0.3.2:6543/2016'
+    baseURL:'http://localhost:6543/2016'
   })
 
   const store = createStore(
@@ -20,14 +20,14 @@ export default function configureStore(initialState) {
           applyMiddleware(thunk, axiosMiddleware(client), Reactotron.reduxMiddleware),
           devTools()
       )
-  );
+  )
 
   if (module.hot) {
     // Enable hot module replacement for reducers
     module.hot.accept(() => {
-      const nextRootReducer = require('../reducers/index').default;
-      store.replaceReducer(nextRootReducer);
-    });
+      const nextRootReducer = require('../reducers/index').default
+      store.replaceReducer(nextRootReducer)
+    })
   }
 
 

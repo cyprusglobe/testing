@@ -1,9 +1,13 @@
 import shallowequal from 'shallowequal'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Platform, View, ListView, Text, StyleSheet, InteractionManager, TouchableHighlight, ActivityIndicatorIOS} from 'react-native'
+import {bindActionCreators} from 'redux'
+import { Platform, View, ListView, Text, StyleSheet, InteractionManager, TouchableHighlight, ActivityIndicator} from 'react-native'
 import AndroidProgress from 'ProgressBarAndroid'
-import * as balloonActionCreators from '../actions/balloonActions'
+import * as balloonsActionCreators from '../actions/balloons/actions'
+import * as balloonActionCreators from '../actions/balloon/actions'
+import {MainRouter} from '../constants/router'
+
 import Image from 'react-native-image-progress'
 import ProgressBar from 'react-native-progress/Bar'
 import { Actions } from 'react-native-router-flux'
@@ -11,52 +15,55 @@ import Button from 'react-native-button'
 import BalloonDetailView from './BalloonDetailView'
 
 class BalloonListView extends Component {
+
   constructor(props) {
     super(props)
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
     this.state = {
-      result: {
-        items: []
-      },
+      results: {},
       isLoading: false,
-      dataSource: this.dataSource.cloneWithRows(this.props.result),
+      dataSource: this.dataSource.cloneWithRows(this.props.results),
       page_info: {
         current_page: 0,
-        total_count: 0,
-        number_of_pages: 0,
-        previous_page: 0,
         next_page: 0
       }
     }
   }
-
+  //
   shouldComponentUpdate(nextProps, nextState) {
+    // console.log(this.props)
     const shouldUpdate =
       !shallowequal(this.props, nextProps) ||
       !shallowequal(this.state, nextState)
     return shouldUpdate
   }
 
-  componentDidMount() {
+  componentWillMount() {
     InteractionManager.runAfterInteractions(() => {
-      this.props.fetchAndSetBalloons(this.props.page_info.current_page)
+      this.props.actions.balloonsActions.fetchStuffs(this.props.page_info.current_page)
     })
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dataSource: this.dataSource.cloneWithRows(nextProps.result)
+      dataSource: this.dataSource.cloneWithRows(nextProps.results)
     })
   }
 
   goToBalloonDetail (id) {
-    Actions.balloons_detail({balloon_detail: {id: id}})
+    const route = MainRouter.getBalloonRoute(id)
+    InteractionManager.runAfterInteractions(() => {
+      this.props.actions.balloonActions.fetchStuff(id)
+      this.props.navigator.push({ id: 'PageTwo', passProps: {id: 1}})
+    })
+
   }
 
   handleMoreBalloons() {
-		this.props.fetchAndSetBalloonsWithPage(this.props.page_info.next_page)
+    // console.log(this.props)
+		this.props.actions.balloonsActions.fetchStuffs(this.props.page_info.next_page)
 	}
 
   renderLoading() {
@@ -94,13 +101,14 @@ class BalloonListView extends Component {
     const isLoading = this.props.isLoading
 
     if (isLoading) {
+
 			footer = (
 				<View style={styles.footer}>
-					<AndroidProgress styleAttr="Normal"/>
+					{Platform.OS === 'ios' ? <ActivityIndicator /> : <AndroidProgress styleAttr="Normal"/>}
 				</View>
 			)
 		} else {
-      if (1 < 3) {
+      if (this.state.page_info.next_page !== null) {
         footer = (
           <TouchableHighlight
             style={styles.footer}
@@ -131,7 +139,7 @@ class BalloonListView extends Component {
 var styles = StyleSheet.create({
   viewContainer: {
     flex: 1,
-    paddingTop: 64
+    paddingTop: 0
   },
   container: {
       flex: 1,
@@ -177,16 +185,20 @@ var styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
-    result: state.balloons.result.items,
-    isLoading: state.balloons.isLoading,
-    page_info: {
-      total_count: state.balloons.page_info.total_count,
-      number_of_pages: state.balloons.page_info.number_of_pages,
-      current_page: state.balloons.page_info.current_page,
-      previous_page: state.balloons.page_info.previous_page,
-      next_page: state.balloons.page_info.next_page
+    results: state.balloonstest.items,
+    isLoading: state.balloonstest.isLoading,
+    page_info: state.balloonstest.page_info
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      balloonsActions: bindActionCreators(balloonsActionCreators, dispatch),
+      balloonActions: bindActionCreators(balloonActionCreators, dispatch)
     }
   }
 }
-export default connect(mapStateToProps, balloonActionCreators)(BalloonListView)
+export default connect(mapStateToProps, mapDispatchToProps)(BalloonListView)
